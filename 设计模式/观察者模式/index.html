@@ -1,0 +1,25 @@
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+	~(function(){
+		var o = $({});
+		$.jianting = function() {
+			o.on.apply(o,arguments);
+		}
+		$.fabu = function() {
+			o.trigger.apply(o,arguments);
+		}
+		$.qingchu = function() {
+			o.off.apply(o,arguments);
+		}
+	})();
+	$.jianting('/test/ls',function(e,a,b,c){
+		alert(a+"||"+b+"||"+c);
+	});
+	$.jianting('/test/ls',function(e,a,b,c){
+		alert('ok');
+	});
+	setTimeout(function(){
+		$.fabu('/test/ls',[1,2,3]);
+	},1000);
+	
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一个通用的事件监听器函数</title>
+</head>
+<body>
+	<script type="text/javascript">
+	    var markyun;
+		markyun.Event = {
+			readyEvent:function(fn) {
+				if(fu == null){
+					fn = document;
+				}
+			var oldonload = window.onload;
+			 	if(typeof window.onload != 'function') {
+					window.onload = fn;
+				}else {
+					window.onload = function() {
+						oldonload();
+						fn();
+					};
+				}
+		 	},
+		 addEvent:function(element,type,handler) {
+		 	if(element.addEventListener) {
+		 		element.addEventListener(type,handler,false);
+		 	}else if(element.attachEvent) {
+		 		element.attachEvent('on' + type , handler);
+		 	}else {
+		 		element['on' + type] = null;
+		 	}
+		 },
+
+		 stopPropagation: function(ev) {
+		 	if(ev.stopProgagation) {
+		 		ev.stopProgagation();
+		 	} else {
+		 		ev.cancleBubble = true;
+		 	}
+		 },
+		 preventDefault: function(event) {
+		 	if(event.preventDefault) {
+		 		event.preventDefault();
+		 	} else {
+		 		event.returnValue = false;
+		 	}
+		 },
+		 getTarget: function(event) {
+		 	return event.target || event.srcElement;
+		 },
+		 getEvent: function(e) {
+		 	var ev = e || window.event;
+		 	if(!ev) {
+		 		var c = this.getEvent.caller;
+		 		while(c) {
+		 				ev = c.arguments[0];
+		 				if(ev && Event == ev.constructor){ break;}
+		 				c = c.caller;
+		 		}
+		 	}
+		 return ev;
+		 }
+	}
+
+	</script>
+</body>
+</html>

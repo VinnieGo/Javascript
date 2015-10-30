@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="observer.js"></script>
+</head>
+<body>
+<button id="addNewObserver">Add New Observer checkbox</button>
+<input id="mainCheckbox" type="checkbox"/>
+<div id="observerContainer"></div>
+<script type="text/javascript">
+	var controlCheckbox = document.getElementById("mainCheckbox"),
+	addButton = document.getElementById("addNewObserver"),
+	container = document.getElementById('observerContainer');
+
+	extend(new Subject(),controlCheckbox);
+
+	controlCheckbox["onclick"] = new Function("controlCheckbox.Notify(controlCheckbox.checked)");
+
+
+	addButton["onclick"] = AddNewObserver;
+
+	function AddNewObserver() {
+		var check = document.createElement("input");
+		check.type = "checkbox";
+
+	extend(new Observer(), check);
+
+	check.Update = function(value) {
+		this.checked = true;
+	};
+
+	controlCheckbox.AddObserver(check);
+
+	container.appendChild(check);
+}
+</script>
+</body>
+</html>
