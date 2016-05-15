@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button tag="login" id="button">gogo</button>
+    <script type="text/javascript">
+    Function.prototype.after = function(afterfn){
+        var self = this;
+        return function(){
+            var ret = self.apply(this,arguments);
+            afterfn.apply(this,arguments);
+            return ret;
+        }
+    }
+    var showlogin = function(){
+        console.log('打开登录浮层');
+    }
+    var log = function(){
+        console.log('上报的标签为:' + this.getAttribute('tag'));//打开登录悬浮层之后上报标签
+    }
+
+    showlogin = showlogin.after(log);
+    document.getElementById('button').onclick = showlogin;
+    </script>
+</body>
+</html>
