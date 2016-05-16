@@ -1,0 +1,50 @@
+<!--装饰模式之插件式的表单验证-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        用户名：<input id="username" type="text">
+        密码：<input id="password" type="password"/>
+        <input type="button" id="button" value="提交" />
+    </body>
+    <script>
+        Function.prototype.beforeSubmit = function(beforeFn){
+            var self = this;
+            return function(){
+                if(beforeFn.apply(this,arguments) === false){
+                    return ;
+                }
+                return self.apply(this,arguments);
+            }
+        }
+        var username = document.getElementById('username'),
+            password = document.getElementById('password'),
+            subbtn = document.getElementById('button');
+
+        var validata = function(){
+            if(username.value === ''){
+                alert('用户名不能为空');
+                return false;
+            }
+            if(password.value === ''){
+                alert('密码不能为空');
+                return false;
+            }
+
+        }
+            function formSubmit(){
+                var param = {
+                    username:username.value,
+                    password:password.value
+                }
+                console.log(JSON.stringify(param)+' is uploading..');
+            }
+            formSubmit = formSubmit.beforeSubmit(validata);
+            subbtn.onclick = function(){
+                formSubmit();
+            }
+    </script>
+</html>
