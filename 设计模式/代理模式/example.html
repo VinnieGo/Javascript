@@ -1,0 +1,35 @@
+<!-- 虚拟代理实现图片的预加载 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var myImage = (function() {
+                var imageNode = document.createElement('img');
+                document.body.appendChild(imageNode);
+                return {
+                    setSrc: function(src) {
+                        imageNode.src = src;
+                    }
+                }
+            })();
+
+            var proxyImage = (function() {
+                var img = new Image;
+                img.onload = function() {
+                    myImage.setSrc(this.src);
+                }
+                return {
+                    setSrc: function(src) {
+                        myImage.setSrc('loding.gif');
+                        img.src = src;
+                    }
+                }
+            })();
+            proxyImage.setSrc('http://img.bimg.126.net/photo/rl0IM2SIJK8jWXgIgxhJsw==/2871889187379358521.jpg');
+        </script>
+    </body>
+</html>
