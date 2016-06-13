@@ -1,3 +1,7 @@
+/**
+ * 原型模式构造js对象
+ * @desc 缺点：引用类型属性的共享问题
+ */
 function Person() {
 
 }
@@ -14,5 +18,3 @@ person1.name = "Vinnie";
 
 person1.sayName();
 person2.sayName();
-
-//原型模式
