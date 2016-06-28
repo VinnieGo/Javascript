@@ -24,3 +24,10 @@ function Sub() {
 var instance = new Sub();
 console.log(instance.name);
 console.log(instance.age);
+
+function great(a,b,m){
+	var c = a.concat(b).sort(function(a,b){
+		return b-a;
+	});
+	return c.splice(0,m);
+}

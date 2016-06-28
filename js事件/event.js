@@ -53,3 +53,11 @@ var EventUtil = {
         }
     }
 }
+
+
+var lis = document.getElementByTagName('li');
+for(var i =0; i < lis.length; i++){
+    lis[i].onclick = function(){
+        console.log(this.innerHTMl);
+    }
+}
