@@ -19,19 +19,18 @@ function sum(array) {
     var res = array.reduce((prev, cur, index, array) => {
         return prev + cur;
     });
-    console.log(res);
 }
 
 var p = new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve(12);
-    }, 1000);
+    }, 500);
 })
 
 var p1 = new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve(11);
-    }, 2000);
+    }, 1000);
 });
 //promise chain
 p.then(double).then(increament).then(log).catch((err) => {
@@ -39,9 +38,28 @@ p.then(double).then(increament).then(log).catch((err) => {
 })
 
 //Promise.all
-Promise.all([p, p1]).then(sum).catch((err) => {
+var startTime = Date.now();
+Promise.all([p, p1]).then(sum).then(() => {
+    // console.log(Date.now() - startTime);
+}).catch((err) => {
     console.log(err)
 });
 
 
-/*=====  End of Section comment block  ======*/
+var winnerPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('this is winner');
+        resolve('this is winner');
+    }, 10);
+});
+
+var loserPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('this is loser');
+        resolve('this is loser');
+    }, 2000);
+});
+
+Promise.race([winnerPromise, loserPromise]).then((value) => {
+    console.log(value);
+});
